@@ -1,0 +1,373 @@
+/*!
+ * Start Bootstrap - Business Casual (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    /*font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'Play', arial;
+    background-color: #DCDCDC;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.font2{
+  font-family: 'Squada One', arial;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 1.25em;
+    line-height: 1.6;
+    color: #000;
+}
+
+hr {
+    max-width: 400px;
+    border-color: #999999;
+}
+
+.brand,
+.address-bar {
+    display: none;
+}
+
+.navbar-brand {
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.navbar-nav {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 3px;
+}
+
+.img-full {
+    min-width: 100%;
+}
+
+.brand-before,
+.brand-name {
+    text-transform: capitalize;
+}
+
+.brand-before {
+    margin: 15px 0;
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 4em;
+}
+
+.tagline-divider {
+    margin: 15px auto 3px;
+    max-width: 250px;
+    border-color: #999999;
+}
+
+.box {
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+.intro-text {
+    text-transform: uppercase;
+    font-size: 1.25em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.img-border {
+    float: none;
+    margin: 0 auto 0;
+    border: #999999 solid 1px;
+}
+
+.img-left {
+    float: none;
+    margin: 0 auto 0;
+}
+
+footer {
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+footer p {
+    margin: 0;
+    padding: 50px 0;
+}
+
+@media screen and (min-width:768px) {
+    .brand {
+        display: inherit;
+        margin: 0;
+        padding: 30px 0 10px;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 5em;
+        font-weight: 700;
+        line-height: normal;
+        color: #fff;
+    }
+
+    .top-divider {
+        margin-top: 0;
+    }
+
+    .img-left {
+        float: left;
+        margin-right: 25px;
+    }
+
+    .address-bar {
+        display: inherit;
+        margin: 0;
+        padding: 0 0 40px;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        text-transform: uppercase;
+        font-size: 1.25em;
+        font-weight: 400;
+        letter-spacing: 3px;
+        color: black;
+        background-color: white;
+    }
+
+    .navbar {
+        border-radius: 0;
+    }
+
+    .navbar-header {
+        display: none;
+    }
+
+    .navbar {
+        min-height: 0;
+    }
+
+    .navbar-default {
+        border: none;
+        background: #fff;
+        background: rgba(255,255,255,0.9);
+    }
+
+    .nav>li>a {
+        padding: 35px;
+    }
+
+    .navbar-nav>li>a {
+        line-height: normal;
+    }
+
+    .navbar-nav {
+        display: table;
+        float: none;
+        margin: 0 auto;
+        table-layout: fixed;
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.logo{
+  width: 300px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.bgwhite{
+  background-color: white !important;
+}
+
+.bgblack{
+  background-color: black !important;
+}
+
+.bgblue{
+  background-color: #338BFF !important;
+}
+
+.bggray{
+  background-color: #202020 !important;
+}
+
+.bgdarkred{
+  background-color: #B2282D !important;
+}
+
+.cwhite{
+  color: white !important;
+}
+
+.cblack{
+  color: black !important;
+}
+
+.cblue{
+  color: #338BFF !important;
+}
+
+.cdarkblue{
+  color: #002C5F !important;
+}
+
+.cred{
+  color: #F64747 !important;
+}
+
+.cdarkred{
+  color: #B2282D !important;
+}
+
+.cgreen{
+  color: #2DA12B !important;
+}
+
+.changeheight{
+  height: 70px !important;
+}
+
+.padside{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sidemargin{
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.padtopbot{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+.padbot{
+  padding-bottom: 40px;
+}
+
+.transparent{
+  opacity: .9;
+}
+
+.navbrand{
+  width: 100px;
+}
+
+.no-padding{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.txtsmall{
+  font-size: 15px !important;
+}
+
+.txt10{
+  font-size: 12px !important;
+}
+
+.no-margin{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.margin-top{
+  margin-top: 30px;
+}
+
+.margin-bottom{
+  margin-bottom: 25px;
+}
+
+.lightborder{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid white;
+  margin-top: 10px;
+}
+
+.fadein{
+  animation-name: fromleft;
+  animation-duration: 1s;
+}
+
+.fadein2s{
+  animation-name: opacity;
+  animation-duration: 2s;
+}
+
+.fadein3s{
+  animation-name: opacity;
+  animation-duration: 3s;
+}
+
+.fadein4s{
+  animation-name: opacity;
+  animation-duration: 4s;
+}
+
+.fadein5s{
+  animation-name: opacity;
+  animation-duration: 5s;
+}
+
+.frombot-animate{
+  animation-name: frombot;
+  animation-duration: 2.5s;
+}
+
+@keyframes opacity{
+  0%   {opacity: 0;}
+  100% {opacity: 10;}
+}
+
+@keyframes fromleft {
+  0%   {opacity: 0; margin-top: -50px;}
+  100% {opacity: 10; margin-top: 0px;}
+}
+
+@keyframes frombot{
+  0%   {opacity: 0; margin-top: 100px;}
+  100% {opacity: 10; margin-top: 0px;}
+}
+
+/* Flot Chart Containers */
+
+.flot-chart {
+    display: block;
+    height: 400px;
+}
+
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
