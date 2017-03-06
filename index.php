@@ -611,8 +611,3 @@ for ($i = 0; $i <$arraycount; $i++){
 
 </body>
 </html>
-<style media="screen" type="text/css">
-	.fa{
-		color: black !important;
-	}
-</style>
