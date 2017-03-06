@@ -1,7 +1,7 @@
 <?php
  function connect(){
    try {
-     $db = new PDO("mysql:host=localhost;dbname=srs","root","creativity31", array(
+     $db = new PDO("mysql:host=localhost;dbname=srs","root","", array(
     		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
     		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
     		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -224,7 +224,9 @@ function getsanction2(){
 
 function getsanctionbyid($id){
 	$db = connect();
-	$stmt = $db->prepare("SELECT * from sanction where sanc_id = :id");
+	$stmt = $db->prepare("SELECT * from sanction
+    INNER JOIN student ON sanction.s_id = student.s_id
+    where sanc_id = :id");
 	$stmt->bindValue('id',$id);
 	$stmt->execute();
 	$account = $stmt->fetch(PDO::FETCH_OBJ);
