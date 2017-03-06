@@ -219,7 +219,7 @@ for ($i = 0; $i <$arraycount; $i++){
             </div>
         </div>
 
-        <div class="row" id="contact">
+        <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
@@ -262,7 +262,7 @@ for ($i = 0; $i <$arraycount; $i++){
     <!-- /.container -->
 
     <!-- FOOTER -->
-    <footer class="bggray padtopbot">
+    <footer class="bggray padtopbot"  id="contact">
         <div class="container">
             <div class="row text-center margin-bottom">
               <h1 class="text-center cwhite no-margin" style="margin-top: 10px;"> Developers </h1>
