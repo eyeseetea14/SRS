@@ -29,6 +29,7 @@ if($db = connect()){
 					$id = $account2->user_id;
 					$_SESSION['admin']=$user;
 					$_SESSION['id']=$id;
+
 					header("Location:../pages/index.php");
 		}
 		else{
