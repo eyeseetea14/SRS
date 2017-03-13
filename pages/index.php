@@ -312,24 +312,24 @@ if(!empty(getbulletin())){ //bulletin control
 
 																		 <label for="image"><i class="fa fa-picture-o"></i> Image :
 																		 <p style="display: inline; color: red;" id="imgerror"></p></label>
-																	 		<input id="image" name="image" type="file" <?php echo $dis; ?> required><br>
+																	 		<input id="image" name="image" type="file" <?php echo $dis; ?> disabled required><br>
 
 																		<label for=""> <i class="fa fa-user"></i> Title :
 																		<p style="display: inline; color: red;" id="titleerror"></p></label><br>
 																			<div class="" id="errortitle">
 																				<input class="form-control" id="title" type="text" name="title"
-																				value="" <?php echo $dis; ?> required>
+																				value="" <?php echo $dis; ?> disabled required>
 																			</div>
 
 																		<label for="post"><i class="fa fa-comments"></i> Post :
 																		<p style="display: inline; color: red;" id="posterror"></p></label><br>
 																			<div class="" id="errorpost">
 																				<textarea class="form-control" id="post" name="post" rows="5"
-																				<?php echo $dis; ?> required></textarea>
+																				<?php echo $dis; ?> required disabled></textarea>
 																			</div>
 
 																			<input class="btn btn-default" style="margin-top: 10px; width: 120px;"
-																			 type="submit" name="submit" value="Submit" id="bulletin" <?php echo $dis; ?>>
+																			 type="submit" name="submit" value="Submit" id="bulletin" disabled <?php echo $dis; ?>>
 																		</form>
 																	</div>
 
@@ -356,7 +356,7 @@ if(!empty(getbulletin())){ //bulletin control
 																		<div class="container-fluid">
 																			<form class="text-right" action="../process/delete.php" method="post">
 																				<button type="submit" class="btn btn-danger"
-																				name="delete" <?php echo $dis2; ?>>Delete Bulletin</button>
+																				name="delete" disabled <?php echo $dis2; ?>>Delete Bulletin</button>
 																			</form>
 																		</div>
 																	</div>
