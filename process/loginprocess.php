@@ -22,7 +22,6 @@ if($db = connect()){
 
 				$query->execute($execute_query);
 
-				if($user == "admin" || $user == "admin2" || $user == "dean"){
 					$stmt2 = $db->prepare("SELECT * from admin where user = :user");
 					$stmt2->bindValue(':user',$user);
 					$stmt2->execute();
@@ -31,11 +30,6 @@ if($db = connect()){
 					$_SESSION['admin']=$user;
 					$_SESSION['id']=$id;
 					header("Location:../pages/index.php");
-				}
-				else{
-					header("Location:../index.php?error=1");
-				}
-
 		}
 		else{
 			header("Location:../index.php?error=1");
