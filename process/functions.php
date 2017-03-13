@@ -213,6 +213,16 @@ function getsanction2(){
 	return $results;
 }
 
+function getsanction3(){
+  $db = connect();
+	$sth = $db->prepare("SELECT * From sanction
+  INNER JOIN student ON sanction.s_id = student.s_id
+  ORDER BY student.year,student.surname");
+	$sth->execute();
+	$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+	return $results;
+}
+
 // function getsanctionbyname($name){
 // 	$db = connect();
 // 	$sth = $db->prepare("SELECT * From sanction WHERE s_name = ?");
@@ -426,7 +436,7 @@ function deletebulletin(){
 function options(){
   $output = '
   <option>50</option>
-  <option>160</option>
+  <option>150</option>
   <option>PAID</option>
   <option>PRESENT</option>
   <option>CLEARED</option>';

@@ -1,0 +1,432 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Mar 06, 2017 at 01:38 AM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `srs`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(15) NOT NULL,
+  `pass` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `user`, `pass`) VALUES
+(1, 'dean', 'dean'),
+(2, 'admin', 'ictTreasurer062'),
+(3, 'admin2', 'admin2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bulletin`
+--
+
+CREATE TABLE IF NOT EXISTS `bulletin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imgname` varchar(200) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `post` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting`
+--
+
+CREATE TABLE IF NOT EXISTS `meeting` (
+  `m_id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(50) NOT NULL,
+  `m_date` date NOT NULL,
+  PRIMARY KEY (`m_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`m_id`, `description`, `m_date`) VALUES
+(5, 'Extravgnza', '2017-02-09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `record`
+--
+
+CREATE TABLE IF NOT EXISTS `record` (
+  `r_id` int(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(11) NOT NULL,
+  `dates` date NOT NULL,
+  `time` time NOT NULL,
+  `day` varchar(11) NOT NULL,
+  PRIMARY KEY (`r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+
+--
+-- Dumping data for table `record`
+--
+
+INSERT INTO `record` (`r_id`, `name`, `dates`, `time`, `day`) VALUES
+(1, 'dean', '2017-03-02', '16:58:33', 'Thursday'),
+(2, 'admin', '2017-03-02', '17:06:48', 'Thursday'),
+(3, 'dean', '2017-03-02', '17:07:12', 'Thursday'),
+(4, 'dean', '2017-03-02', '21:03:48', 'Thursday'),
+(5, 'admin', '2017-03-02', '21:39:09', 'Thursday'),
+(6, 'admin', '2017-03-02', '22:24:59', 'Thursday'),
+(7, 'admin', '2017-03-02', '22:30:36', 'Thursday'),
+(8, 'admin', '2017-03-02', '23:08:31', 'Thursday'),
+(9, 'admin', '2017-03-02', '23:56:54', 'Thursday'),
+(10, 'admin', '2017-03-03', '10:25:04', 'Friday'),
+(11, 'dean', '2017-03-03', '11:06:08', 'Friday'),
+(12, 'admin', '2017-03-05', '08:22:22', 'Sunday'),
+(13, 'dean', '2017-03-05', '08:22:53', 'Sunday'),
+(14, 'admin', '2017-03-05', '08:24:13', 'Sunday'),
+(15, 'dean', '2017-03-05', '09:50:12', 'Sunday'),
+(16, 'dean', '2017-03-05', '09:54:32', 'Sunday'),
+(17, 'dean', '2017-03-06', '00:28:34', 'Monday'),
+(18, 'dean', '2017-03-06', '00:29:01', 'Monday'),
+(19, 'dean', '2017-03-06', '00:32:17', 'Monday'),
+(20, 'dean', '2017-03-06', '00:33:28', 'Monday'),
+(21, 'dean', '2017-03-06', '00:34:23', 'Monday'),
+(22, 'dean', '2017-03-06', '00:58:30', 'Monday');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sanction`
+--
+
+CREATE TABLE IF NOT EXISTS `sanction` (
+  `sanc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `s_id` int(11) NOT NULL,
+  `Extravgnza` varchar(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  PRIMARY KEY (`sanc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=679 ;
+
+--
+-- Dumping data for table `sanction`
+--
+
+INSERT INTO `sanction` (`sanc_id`, `s_id`, `Extravgnza`, `total`) VALUES
+(546, 775, 'PAID', 0),
+(547, 776, '150', 150),
+(548, 777, 'PAID', 0),
+(549, 778, '150', 150),
+(550, 779, '150', 150),
+(551, 780, '150', 150),
+(552, 781, 'PAID', 0),
+(553, 782, '150', 150),
+(554, 783, 'PAID', 0),
+(555, 784, '150', 150),
+(556, 785, '150', 150),
+(557, 786, '150', 150),
+(558, 787, '150', 150),
+(559, 788, 'PAID', 0),
+(560, 789, 'PAID', 0),
+(561, 790, 'PAID', 0),
+(562, 791, '150', 150),
+(563, 792, '150', 150),
+(564, 793, 'PAID', 0),
+(565, 794, '150', 150),
+(566, 795, '150', 150),
+(567, 796, 'PAID', 0),
+(568, 797, '150', 150),
+(569, 798, 'PAID', 0),
+(570, 799, 'PAID', 0),
+(571, 800, 'PAID', 0),
+(572, 801, '150', 150),
+(573, 802, 'PAID', 0),
+(574, 803, 'PAID', 0),
+(575, 804, 'PAID', 0),
+(576, 805, 'PAID', 0),
+(577, 806, 'PAID', 0),
+(578, 807, '150', 150),
+(579, 808, '150', 150),
+(580, 809, '150', 150),
+(581, 810, '150', 150),
+(582, 811, '150', 150),
+(583, 812, '150', 150),
+(584, 813, 'PAID', 0),
+(585, 814, '150', 150),
+(586, 815, '150', 150),
+(587, 816, '150', 150),
+(588, 817, 'PAID', 0),
+(589, 818, 'PAID', 0),
+(590, 819, 'PAID', 0),
+(591, 820, 'PAID', 0),
+(592, 821, 'PAID', 0),
+(593, 822, '150', 150),
+(594, 823, '150', 150),
+(595, 824, 'PAID', 0),
+(596, 825, '150', 150),
+(597, 826, 'PAID', 0),
+(598, 827, 'PAID', 0),
+(599, 828, 'PAID', 0),
+(600, 829, 'PAID', 0),
+(601, 830, 'PAID', 0),
+(602, 831, 'PAID', 0),
+(603, 832, 'PAID', 0),
+(604, 833, 'PAID', 0),
+(605, 834, '150', 150),
+(606, 835, 'PAID', 0),
+(607, 836, '150', 150),
+(608, 837, 'PAID', 0),
+(609, 838, 'PAID', 0),
+(610, 839, 'PAID', 0),
+(611, 840, 'PAID', 0),
+(612, 841, 'PAID', 0),
+(613, 842, 'PAID', 0),
+(614, 843, 'PAID', 0),
+(615, 844, 'PAID', 0),
+(616, 845, 'PAID', 0),
+(617, 846, 'PAID', 0),
+(618, 847, 'PAID', 0),
+(619, 848, 'PAID', 0),
+(620, 849, '150', 150),
+(621, 850, '150', 150),
+(622, 851, 'PAID', 0),
+(623, 852, 'PAID', 0),
+(624, 853, 'PAID', 0),
+(625, 854, 'PAID', 0),
+(626, 855, '150', 150),
+(627, 856, '150', 150),
+(628, 857, 'PAID', 0),
+(629, 858, 'PAID', 0),
+(630, 859, 'PAID', 0),
+(631, 860, 'PAID', 0),
+(632, 861, 'PAID', 0),
+(633, 862, 'PAID', 0),
+(634, 863, 'PAID', 0),
+(635, 864, 'PAID', 0),
+(636, 865, '150', 150),
+(637, 866, '150', 150),
+(638, 867, '150', 150),
+(639, 868, '150', 150),
+(640, 869, 'PAID', 0),
+(641, 870, 'PAID', 0),
+(642, 871, '150', 150),
+(643, 872, '150', 150),
+(644, 873, 'PAID', 0),
+(645, 874, 'PAID', 0),
+(646, 875, '150', 150),
+(647, 876, 'PAID', 0),
+(648, 877, 'PAID', 0),
+(649, 878, '150', 150),
+(650, 879, 'PAID', 0),
+(651, 880, 'PAID', 0),
+(652, 881, 'PAID', 0),
+(653, 882, 'PAID', 0),
+(654, 883, '150', 150),
+(655, 884, '150', 150),
+(656, 885, '150', 150),
+(657, 886, 'PAID', 0),
+(658, 887, 'PAID', 0),
+(659, 888, 'PAID', 0),
+(660, 889, '150', 150),
+(661, 890, 'PAID', 0),
+(662, 891, 'PAID', 0),
+(663, 892, 'PAID', 0),
+(664, 893, '150', 150),
+(665, 894, 'PAID', 0),
+(666, 895, '150', 150),
+(667, 896, 'PAID', 0),
+(668, 897, '150', 150),
+(669, 898, '150', 150),
+(670, 899, '150', 150),
+(671, 900, 'PAID', 0),
+(672, 901, '150', 150),
+(673, 902, '150', 150),
+(674, 903, '150', 150),
+(675, 904, '150', 150),
+(676, 905, 'PAID', 0),
+(677, 906, 'PAID', 0),
+(678, 907, 'PAID', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE IF NOT EXISTS `student` (
+  `s_id` int(11) NOT NULL AUTO_INCREMENT,
+  `surname` varchar(50) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `year` enum('1st','2nd','3rd','4th') NOT NULL,
+  `cpnum` bigint(12) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=908 ;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`s_id`, `surname`, `firstname`, `year`, `cpnum`, `name`) VALUES
+(775, 'ABBORAN', 'SALHA', '1st', 123451234512, 'SALHA ABBORAN'),
+(776, 'AMPER\r', 'DAVE MICHAEL\r', '1st', 123451234512, 'DAVE MICHAEL\r AMPER\r'),
+(777, 'ASTILLERO\r', 'MARISCHELLE\r', '1st', 123451234512, 'MARISCHELLE\r ASTILLERO\r'),
+(778, 'BAKIL\r', 'AJMAN JASSER\r', '1st', 123451234512, 'AJMAN JASSER\r BAKIL\r'),
+(779, 'BASIO\r', 'TEOFILO III.\r', '1st', 123451234512, 'TEOFILO III.\r BASIO\r'),
+(780, 'CARO\r', 'JEAN MIKHAIL\r', '1st', 123451234512, 'JEAN MIKHAIL\r CARO\r'),
+(781, 'CATABAS\r', 'FRANCISCO III\r', '1st', 123451234512, 'FRANCISCO III\r CATABAS\r'),
+(782, 'GUMBAN\r', 'JOYCE MAAN\r', '1st', 123451234512, 'JOYCE MAAN\r GUMBAN\r'),
+(783, 'MANDIN\r', 'MARJORIE\r', '1st', 123451234512, 'MARJORIE\r MANDIN\r'),
+(784, 'NASIBOG\r', 'CESAR IAN\r', '1st', 123451234512, 'CESAR IAN\r NASIBOG\r'),
+(785, 'PANOLINO\r', 'NATHANIEL\r', '1st', 123451234512, 'NATHANIEL\r PANOLINO\r'),
+(786, 'PASCUA\r', 'VIC MARTIN\r', '1st', 123451234512, 'VIC MARTIN\r PASCUA\r'),
+(787, 'RODAS\r', 'EL JOHN JESUS\r', '1st', 123451234512, 'EL JOHN JESUS\r RODAS\r'),
+(788, 'TALIMODAO\r', 'FROY LAN\r', '1st', 123451234512, 'FROY LAN\r TALIMODAO\r'),
+(789, 'VILLACURA\r', 'CHRISTY\r', '1st', 123451234512, 'CHRISTY\r VILLACURA\r'),
+(790, 'ALBARICO\r', 'JANA JOYCE\r', '1st', 123451234512, 'JANA JOYCE\r ALBARICO\r'),
+(791, 'ANTOLIHAO\r', 'RALPH LAURENCE\r', '1st', 123451234512, 'RALPH LAURENCE\r ANTOLIHAO\r'),
+(792, 'BARNACHEA\r', 'RALPH\r', '1st', 123451234512, 'RALPH\r BARNACHEA\r'),
+(793, 'CAMILO\r', 'CHRISTOPHER\r', '1st', 123451234512, 'CHRISTOPHER\r CAMILO\r'),
+(794, 'OJALES\r', 'MARC RONEL\r', '1st', 123451234512, 'MARC RONEL\r OJALES\r'),
+(795, 'TINGHIL\r', 'REZIEL ANN\r', '1st', 123451234512, 'REZIEL ANN\r TINGHIL\r'),
+(796, 'ALIVIANO\r', 'GARVIN CASEY\r', '2nd', 123451234512, 'GARVIN CASEY\r ALIVIANO\r'),
+(797, 'ANDILUM\r', 'SANDY MAE\r', '2nd', 123451234512, 'SANDY MAE\r ANDILUM\r'),
+(798, 'APINAN\r', 'WILHELM JAY\r', '2nd', 123451234512, 'WILHELM JAY\r APINAN\r'),
+(799, 'BALLESTA\r', 'GABRIEL\r', '2nd', 123451234512, 'GABRIEL\r BALLESTA\r'),
+(800, 'BENEDICTO\r', 'RODNEY KYLE\r', '2nd', 123451234512, 'RODNEY KYLE\r BENEDICTO\r'),
+(801, 'CALLO\r', 'ANGELICA\r', '2nd', 123451234512, 'ANGELICA\r CALLO\r'),
+(802, 'CARCASONA\r', 'MELCHOR JR.\r', '2nd', 123451234512, 'MELCHOR JR.\r CARCASONA\r'),
+(803, 'DAPIGAN\r', 'RENZ DAVID\r', '2nd', 123451234512, 'RENZ DAVID\r DAPIGAN\r'),
+(804, 'DEDICATORIA\r', 'KENNY\r', '2nd', 123451234512, 'KENNY\r DEDICATORIA\r'),
+(805, 'DIO\r', 'JASMIN\r', '2nd', 123451234512, 'JASMIN\r DIO\r'),
+(806, 'ECONAR\r', 'JEHVY\r', '2nd', 123451234512, 'JEHVY\r ECONAR\r'),
+(807, 'EJARA\r', 'DENVER SHEEN\r', '2nd', 123451234512, 'DENVER SHEEN\r EJARA\r'),
+(808, 'GARMA\r', 'RYDEL RIEL\r', '2nd', 123451234512, 'RYDEL RIEL\r GARMA\r'),
+(809, 'GAVIOLA\r', 'ZYRAH HYACIENTH\r', '2nd', 123451234512, 'ZYRAH HYACIENTH\r GAVIOLA\r'),
+(810, 'INDIN\r', 'AL-RASHID\r', '2nd', 123451234512, 'AL-RASHID\r INDIN\r'),
+(811, 'JONOTA\r', 'ROBERTO JR.\r', '2nd', 123451234512, 'ROBERTO JR.\r JONOTA\r'),
+(812, 'JOSOL\r', 'PAUL PATRICK\r', '2nd', 123451234512, 'PAUL PATRICK\r JOSOL\r'),
+(813, 'LAGRIMAS\r', 'NEIL BRYAN\r', '2nd', 123451234512, 'NEIL BRYAN\r LAGRIMAS\r'),
+(814, 'LAMBAN\r', 'ROSEMARIE DIANE\r', '2nd', 123451234512, 'ROSEMARIE DIANE\r LAMBAN\r'),
+(815, 'MACATIMPAG\r', 'CHRISTIAN\r', '2nd', 123451234512, 'CHRISTIAN\r MACATIMPAG\r'),
+(816, 'MALINAO\r', 'LEONARD RENZ\r', '2nd', 123451234512, 'LEONARD RENZ\r MALINAO\r'),
+(817, 'MOLINA\r', 'RUSSEL JENN\r', '2nd', 123451234512, 'RUSSEL JENN\r MOLINA\r'),
+(818, 'NAVARRA\r', 'EVA MAE IRA\r', '2nd', 123451234512, 'EVA MAE IRA\r NAVARRA\r'),
+(819, 'OLEDAN\r', 'ROD-JHON\r', '2nd', 123451234512, 'ROD-JHON\r OLEDAN\r'),
+(820, 'PRESAS\r', 'ZHYRILLE JAMES\r', '2nd', 123451234512, 'ZHYRILLE JAMES\r PRESAS\r'),
+(821, 'RADAM\r', 'CHRISTIAN JOHN\r', '2nd', 123451234512, 'CHRISTIAN JOHN\r RADAM\r'),
+(822, 'SEROJE\r', 'REYNALDO\r', '2nd', 123451234512, 'REYNALDO\r SEROJE\r'),
+(823, 'TALLEDO\r', 'EARLJOHN\r', '2nd', 123451234512, 'EARLJOHN\r TALLEDO\r'),
+(824, 'ABAD\r', 'RINOZHEL\r', '2nd', 123451234512, 'RINOZHEL\r ABAD\r'),
+(825, 'ALIDON\r', 'ASTROPHEL\r', '2nd', 123451234512, 'ASTROPHEL\r ALIDON\r'),
+(826, 'CACHUELA\r', 'JERICHO\r', '2nd', 123451234512, 'JERICHO\r CACHUELA\r'),
+(827, 'CAILING\r', 'RANSOM\r', '2nd', 123451234512, 'RANSOM\r CAILING\r'),
+(828, 'CASONA\r', 'CJAY\r', '2nd', 123451234512, 'CJAY\r CASONA\r'),
+(829, 'CASTILLO\r', 'CHARLES EVAN\r', '2nd', 123451234512, 'CHARLES EVAN\r CASTILLO\r'),
+(830, 'COMPENDIO\r', 'MICHAEL VON\r', '2nd', 123451234512, 'MICHAEL VON\r COMPENDIO\r'),
+(831, 'DAGONGDONG\r', 'ROMEO\r', '2nd', 123451234512, 'ROMEO\r DAGONGDONG\r'),
+(832, 'DE GUZMAN\r', 'STEVEN CLARK\r', '2nd', 123451234512, 'STEVEN CLARK\r DE GUZMAN\r'),
+(833, 'EDYESCA\r', 'ALEXANDRA MARIE\r', '2nd', 123451234512, 'ALEXANDRA MARIE\r EDYESCA\r'),
+(834, 'ENTICE\r', 'GEORGE JR.\r', '2nd', 123451234512, 'GEORGE JR.\r ENTICE\r'),
+(835, 'INES\r', 'GLAN YSMAEL\r', '2nd', 123451234512, 'GLAN YSMAEL\r INES\r'),
+(836, 'LANCHINEBRE\r', 'RICKY\r', '2nd', 123451234512, 'RICKY\r LANCHINEBRE\r'),
+(837, 'LEGUARDA\r', 'CHARLES KARLO\r', '2nd', 123451234512, 'CHARLES KARLO\r LEGUARDA\r'),
+(838, 'LOREN\r', 'MAHER\r', '2nd', 123451234512, 'MAHER\r LOREN\r'),
+(839, 'MANRIQUE\r', 'DENNIS\r', '2nd', 123451234512, 'DENNIS\r MANRIQUE\r'),
+(840, 'MENDOZA\r', 'MICHAEL REY\r', '2nd', 123451234512, 'MICHAEL REY\r MENDOZA\r'),
+(841, 'NIPAS\r', 'MARIA CHRISTINA\r', '2nd', 123451234512, 'MARIA CHRISTINA\r NIPAS\r'),
+(842, 'PADILLA\r', 'ROMEIRE\r', '2nd', 123451234512, 'ROMEIRE\r PADILLA\r'),
+(843, 'QUIMINSAO\r', 'FRANCIS LEO\r', '2nd', 123451234512, 'FRANCIS LEO\r QUIMINSAO\r'),
+(844, 'ROMERO\r', 'ELLA CAMILLE\r', '2nd', 123451234512, 'ELLA CAMILLE\r ROMERO\r'),
+(845, 'SARAGENA\r', 'SAMANTHA GAIL\r', '2nd', 123451234512, 'SAMANTHA GAIL\r SARAGENA\r'),
+(846, 'SIBLE\r', 'HAZEL\r', '2nd', 123451234512, 'HAZEL\r SIBLE\r'),
+(847, 'TINGSON\r', 'RONALD\r', '2nd', 123451234512, 'RONALD\r TINGSON\r'),
+(848, 'AGOD\r', 'DANISSE ERLYNE\r', '3rd', 123451234512, 'DANISSE ERLYNE\r AGOD\r'),
+(849, 'ALTERADO\r', 'CLYNT TROY\r', '3rd', 123451234512, 'CLYNT TROY\r ALTERADO\r'),
+(850, 'AMBOY\r', 'MC HENRY\r', '3rd', 123451234512, 'MC HENRY\r AMBOY\r'),
+(851, 'BALINGATA\r', 'RESNEL\r', '3rd', 123451234512, 'RESNEL\r BALINGATA\r'),
+(852, 'BAUGBOG\r', 'MICHAEL\r', '3rd', 123451234512, 'MICHAEL\r BAUGBOG\r'),
+(853, 'BAYOTAS\r', 'JOEY\r', '3rd', 123451234512, 'JOEY\r BAYOTAS\r'),
+(854, 'BONIFACIO\r', 'KENO\r', '3rd', 123451234512, 'KENO\r BONIFACIO\r'),
+(855, 'CABANLIT\r', 'WILSON JR.\r', '3rd', 123451234512, 'WILSON JR.\r CABANLIT\r'),
+(856, 'CASAQUITE\r', 'FE\r', '3rd', 123451234512, 'FE\r CASAQUITE\r'),
+(857, 'CONTORNO\r', 'MYLENE\r', '3rd', 123451234512, 'MYLENE\r CONTORNO\r'),
+(858, 'CORILLA\r', 'LESTER BRIAN\r', '3rd', 123451234512, 'LESTER BRIAN\r CORILLA\r'),
+(859, 'DALIPE\r', 'ALAN MARTIN\r', '3rd', 123451234512, 'ALAN MARTIN\r DALIPE\r'),
+(860, 'FERNANDEZ\r', 'RAFAEL\r', '3rd', 123451234512, 'RAFAEL\r FERNANDEZ\r'),
+(861, 'HADJI ALI\r', 'AGAKHAN\r', '3rd', 123451234512, 'AGAKHAN\r HADJI ALI\r'),
+(862, 'IMBOD\r', 'EMAN\r', '3rd', 123451234512, 'EMAN\r IMBOD\r'),
+(863, 'JAMORA\r', 'JERLYN\r', '3rd', 123451234512, 'JERLYN\r JAMORA\r'),
+(864, 'LAMBAN\r', 'GLENN PATRICK\r', '3rd', 123451234512, 'GLENN PATRICK\r LAMBAN\r'),
+(865, 'LAYSON\r', 'EDWARD JAMES\r', '3rd', 123451234512, 'EDWARD JAMES\r LAYSON\r'),
+(866, 'MACABANI\r', 'BEVERLY\r', '3rd', 123451234512, 'BEVERLY\r MACABANI\r'),
+(867, 'MANTE\r', 'EMILIO AURVILLE III\r', '3rd', 123451234512, 'EMILIO AURVILLE III\r MANTE\r'),
+(868, 'MARIANO\r', 'KATRINA\r', '3rd', 123451234512, 'KATRINA\r MARIANO\r'),
+(869, 'MORENO\r', 'MAE JEN\r', '3rd', 123451234512, 'MAE JEN\r MORENO\r'),
+(870, 'PACALDO\r', 'KIM AILEEN\r', '3rd', 123451234512, 'KIM AILEEN\r PACALDO\r'),
+(871, 'RAVANES\r', 'MHEEL JHONE\r', '3rd', 123451234512, 'MHEEL JHONE\r RAVANES\r'),
+(872, 'SALIPADA\r', 'EDEL HAMSA\r', '3rd', 123451234512, 'EDEL HAMSA\r SALIPADA\r'),
+(873, 'SALIUT\r', 'BETCHIE GAY\r', '3rd', 123451234512, 'BETCHIE GAY\r SALIUT\r'),
+(874, 'SUMAYANG\r', 'JULES BRIAN\r', '3rd', 123451234512, 'JULES BRIAN\r SUMAYANG\r'),
+(875, 'TALADTAD\r', 'BILL JOSEPH\r', '3rd', 123451234512, 'BILL JOSEPH\r TALADTAD\r'),
+(876, 'VALLE\r', 'SANDRU MOSES\r', '3rd', 123451234512, 'SANDRU MOSES\r VALLE\r'),
+(877, 'VELARDE\r', 'VINA\r', '3rd', 123451234512, 'VINA\r VELARDE\r'),
+(878, 'YUZON\r', 'CARINA PATRICIA\r', '3rd', 123451234512, 'CARINA PATRICIA\r YUZON\r'),
+(879, 'ARAIZ\r', 'KENNETH CLINTON\r', '3rd', 123451234512, 'KENNETH CLINTON\r ARAIZ\r'),
+(880, 'MAGLANGIT\r', 'REA JANE BIE\r', '3rd', 123451234512, 'REA JANE BIE\r MAGLANGIT\r'),
+(881, 'OMANDAC\r', 'ALJON MAR\r', '3rd', 123451234512, 'ALJON MAR\r OMANDAC\r'),
+(882, 'POTESTAS\r', 'KATHERINE\r', '3rd', 123451234512, 'KATHERINE\r POTESTAS\r'),
+(883, 'ZAILON\r', 'ZAKEY\r', '3rd', 123451234512, 'ZAKEY\r ZAILON\r'),
+(884, 'BADIS\r', 'AIKY\r', '4th', 123451234512, 'AIKY\r BADIS\r'),
+(885, 'BERONILLA\r', 'NOEME\r', '4th', 123451234512, 'NOEME\r BERONILLA\r'),
+(886, 'CREDO\r', 'JOHN CARLO\r', '4th', 123451234512, 'JOHN CARLO\r CREDO\r'),
+(887, 'JOAQUIN\r', 'MILKY\r', '4th', 123451234512, 'MILKY\r JOAQUIN\r'),
+(888, 'LAGUIAB\r', 'AISA\r', '4th', 123451234512, 'AISA\r LAGUIAB\r'),
+(889, 'PHALA\r', 'JOSE LITO\r', '4th', 123451234512, 'JOSE LITO\r PHALA\r'),
+(890, 'SALVADOR\r', 'STEPHEN CARLO\r', '4th', 123451234512, 'STEPHEN CARLO\r SALVADOR\r'),
+(891, 'SEROJALES\r', 'RUBY JANE\r', '4th', 123451234512, 'RUBY JANE\r SEROJALES\r'),
+(892, 'SININING\r', 'QUINNIE ANA JOY\r', '4th', 123451234512, 'QUINNIE ANA JOY\r SININING\r'),
+(893, 'TURTOR\r', 'CHARLITO JR.\r', '4th', 123451234512, 'CHARLITO JR.\r TURTOR\r'),
+(894, 'UY\r', 'JOHN CARLO\r', '4th', 123451234512, 'JOHN CARLO\r UY\r'),
+(895, 'AQUINO\r', 'CARLO\r', '4th', 123451234512, 'CARLO\r AQUINO\r'),
+(896, 'CANQUE\r', 'VAN\r', '4th', 123451234512, 'VAN\r CANQUE\r'),
+(897, 'DIGAL\r', 'COLEEN MAE\r', '4th', 123451234512, 'COLEEN MAE\r DIGAL\r'),
+(898, 'GOMEZ\r', 'SHIELA ROSE\r', '4th', 123451234512, 'SHIELA ROSE\r GOMEZ\r'),
+(899, 'LAUZON\r', 'MARY MARGARET\r', '4th', 123451234512, 'MARY MARGARET\r LAUZON\r'),
+(900, 'MALAGA\r', 'JUNEL\r', '4th', 123451234512, 'JUNEL\r MALAGA\r'),
+(901, 'MANGARON\r', 'ALOJA AMOR\r', '4th', 123451234512, 'ALOJA AMOR\r MANGARON\r'),
+(902, 'NAZARENO\r', 'KEVIN\r', '4th', 123451234512, 'KEVIN\r NAZARENO\r'),
+(903, 'OMILA\r', 'JACKIE LOU\r', '4th', 123451234512, 'JACKIE LOU\r OMILA\r'),
+(904, 'SABEJON\r', 'MARK LOID\r', '4th', 123451234512, 'MARK LOID\r SABEJON\r'),
+(905, 'UTBO', 'JERLYN MAE', '4th', 123451234512, 'JERLYN MAE UTBO'),
+(906, 'PINERO', 'JOAR', '2nd', 123456712345, 'JOAR PINERO'),
+(907, 'RANON', 'JERICHO EARL', '2nd', 123456712345, 'JERICHO EARL RANON');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
