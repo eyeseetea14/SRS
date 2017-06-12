@@ -1,7 +1,7 @@
 <?php
  function connect(){
    try {
-     $db = new PDO("mysql:host=localhost;dbname=srs","root","creativity31", array(
+     $db = new PDO("mysql:host=localhost;dbname=srs","root","", array(
     		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
     		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
     		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -279,6 +279,22 @@ function getrecord(){
 	return $account;
 }
 
+function downloadrecord(){
+	$db = connect();
+	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 10");
+	$stmt->execute();
+	$account = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	return $account;
+}
+
+function getrecordmodal(){
+	$db = connect();
+	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 100");
+	$stmt->execute();
+	$account = $stmt->fetchAll(PDO::FETCH_OBJ);
+	return $account;
+}
+
 function searchstudent($name){ //getemp2
 	$names = "";
 	$names.= '%';
@@ -434,13 +450,54 @@ function deletebulletin(){
 //you can add another options here
 //a feature will be added later
 function options(){
-  $output = '
-  <option>50</option>
-  <option>150</option>
-  <option>PAID</option>
-  <option>PRESENT</option>
-  <option>CLEARED</option>';
-  return $output;
+  $output = '';
+  $r = getmeet();
+  $penaltyarray = [];
+  $count = 0;
+  //isolate penalty column
+  foreach ($r as $pen) {
+    $penalty[] = $pen->penalty;
+    $count++;
+  }
+    //mark x the first instance of a value with similarity
+    for($i = 0; $i < $count-1; $i++){
+      for($x = $i; $x < $count-1; $x++){
+        if($penalty[$i] == $penalty[$x+1]){
+          $penalty[$i] = "x";
+          echo "trying";
+        }
+      }
+    }
+    //move to new array
+    $new_arr = [];
+    $new_count = 0;
+    foreach($penalty as $a){
+      if($a != 'x'){
+        $new_arr[] = $a;
+        $new_count++;
+      }
+    }
+    //arrange the array in ascending order
+    for($i = 0; $i < $new_count-1; $i++){
+      for($x = $i; $x < $new_count-1; $x++){
+        if($new_arr[$i] > $new_arr[$x+1]){
+          $temp = $new_arr[$i];
+          $new_arr[$i] = $new_arr[$x+1];
+          $new_arr[$x+1] = $temp;
+        }
+      }
+    }
+    //pass into html entity
+    foreach ($new_arr as $pen) {
+      $output .= '<option>';
+      $output .= $pen;
+      $output .= '</option>';
+    }
+    $output .= '
+    <option>PAID</option>
+    <option>PRESENT</option>
+    <option>CLEARED</option>';
+    return $output;
 }
 
 function getadmins(){
@@ -451,10 +508,57 @@ function getadmins(){
 	return $results;
 }
 
-function findadmin($name){
+function findadmin($name,$priv){
+  $db = connect();
+  $q = $db->prepare("SELECT * FROM admin WHERE user = :user OR
+  privilege = :priv");
+  $q->bindValue('user',$name);
+  $q->bindValue('priv',$priv);
+  if($q->execute()){
+      if($q->rowCount() > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+}
+
+function findadminuser($name){
   $db = connect();
   $q = $db->prepare("SELECT * FROM admin WHERE user = :user");
   $q->bindValue('user',$name);
+  if($q->execute()){
+      if($q->rowCount() > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+}
+
+function findsameuser($name,$id){
+  $db = connect();
+  $q = $db->prepare("SELECT * FROM admin WHERE user = :user AND id <> :id");
+  $q->bindValue('user',$name);
+  $q->bindValue('id',$id);
+  if($q->execute()){
+      if($q->rowCount() > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+}
+
+function findsamepriv($priv, $id){
+  $db = connect();
+  $q = $db->prepare("SELECT * FROM admin WHERE privilege = :priv
+  AND id <> :id");
+  $q->bindValue('priv',$priv);
+  $q->bindValue('id',$id);
   if($q->execute()){
       if($q->rowCount() > 0){
         return true;

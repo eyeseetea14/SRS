@@ -7,10 +7,9 @@ include "process/functions.php";
 $loc = "uploads/";
 $src = "img/slide-1.jpg";
 $title = 'Title Here';
-$par = 'The boxes used in this template are nested inbetween a
-	normal Bootstrap row and the start of your column layout.
-	The boxes will be full-width boxes, so if you want to make
-	them smaller then you will need to customize. <br>
+$par = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Nunc placerat diam quis nisl vestibulum dignissim. In hac
+  habitasse platea dictumst. <br>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 	Nunc placerat diam quis nisl vestibulum dignissim. In hac
 	habitasse platea dictumst. Interdum et malesuada fames ac
@@ -37,6 +36,16 @@ $arraycount = count($getdesc);
 for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
 }
+
+if($arraycount >= 1){$meet1 = $desc[0];}
+if($arraycount >= 2){$meet2 = $desc[1];}
+if($arraycount >= 3){$meet3 = $desc[2];}
+if($arraycount >= 4){$meet4 = $desc[3];}
+if($arraycount >= 5){$meet5 = $desc[4];}
+if($arraycount >= 6){$meet6 = $desc[5];}
+if($arraycount >= 7){$meet7 = $desc[6];}
+if($arraycount >= 8){$meet8 = $desc[7];}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +79,7 @@ for ($i = 0; $i <$arraycount; $i++){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="icon" type="image/png" href="img/favicon.png">
 
 </head>
 
@@ -219,7 +229,7 @@ for ($i = 0; $i <$arraycount; $i++){
             </div>
         </div>
 
-        <div class="row" id="contact">
+        <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
@@ -262,7 +272,7 @@ for ($i = 0; $i <$arraycount; $i++){
     <!-- /.container -->
 
     <!-- FOOTER -->
-    <footer class="bggray padtopbot">
+    <footer class="bggray padtopbot" id="contact">
         <div class="container">
             <div class="row text-center margin-bottom">
               <h1 class="text-center cwhite no-margin" style="margin-top: 10px;"> Developers </h1>
@@ -501,16 +511,16 @@ for ($i = 0; $i <$arraycount; $i++){
 												<tbody id="sanctions-table">
 													<?php foreach (getsanction() as $k):?>
 														<tr>
-															<td><?php echo $k->surname.', '.$k->firstname ?></td>
+															<td><?php echo $k->surname.', '.$k->firstname; ?></td>
 															<?php $total = 0;?>
-															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
-															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
-															<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
-															<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
-															<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
-															<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
-															<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
-															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+															<?php if($arraycount >= 1){echo '<td>'.$k->$meet1.'</td>';} ?>
+															<?php if($arraycount >= 2){echo '<td>'.$k->$meet2.'</td>';} ?>
+															<?php if($arraycount >= 3){echo '<td>'.$k->$meet3.'</td>';} ?>
+															<?php if($arraycount >= 4){echo '<td>'.$k->$meet4.'</td>';} ?>
+															<?php if($arraycount >= 5){echo '<td>'.$k->$meet5.'</td>';} ?>
+															<?php if($arraycount >= 6){echo '<td>'.$k->$meet6.'</td>';} ?>
+															<?php if($arraycount >= 7){echo '<td>'.$k->$meet7.'</td>';} ?>
+															<?php if($arraycount >= 8){echo '<td>'.$k->$meet8.'</td>';} ?>
 															<td><?php if($k->total == 0){echo "CLEARED";}else{echo $k->total;}?></td>
 														</tr>
 														<?php endforeach;?>
@@ -527,6 +537,15 @@ for ($i = 0; $i <$arraycount; $i++){
     </div>
   </div>
 
+	<div class="modal fade" role="dialog" id="errormodal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="text-center" style="padding: 10px 20px;">
+						<h4 id="text"></h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
@@ -587,27 +606,26 @@ for ($i = 0; $i <$arraycount; $i++){
 					$('[data-toggle="tooltip"]').tooltip();
 			});
 
+			var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			console.log(error);
+			if(error != ''){
+				console.log('inside here');
+				switch (error) {
+				 case '1':
+					 $('#text').text("Invalid user or password");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '2':
+					 $('#text').text("You need to login first!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '3':
+					 $('#text').text("You need super user privileges!");
+					 $('#errormodal').modal('show');
+					 break;
+				}
+			}
     </script>
-
-    <?php
-    if(isset($_GET['error']) && $_GET['error'] == 1){
-      echo '<script type="text/javascript">
-        alert("Invalid user or password");
-      </script>';
-    }
-
-    if(isset($_GET['error']) && $_GET['error'] == 2){
-      echo '<script type="text/javascript">
-        alert("You need to login first!");
-      </script>';
-    }
-
-    if(isset($_GET['error']) && $_GET['error'] == 3){
-      echo '<script type="text/javascript">
-        alert("You need super user privileges");
-      </script>';
-    }
-     ?>
 
 </body>
 </html>

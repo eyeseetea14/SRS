@@ -6,13 +6,13 @@ if(!isset($_SESSION['admin'])){
 }
 
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
 }
-$admin = $_SESSION['admin'];
-$account = getadmin($admin);
+$id = $_SESSION['id'];
+$account = getadminbyid($id);
 
 //default bulletin properties
 $loc = "../uploads/";
@@ -43,6 +43,7 @@ if(!empty(getbulletin())){ //bulletin control
 	$dis2 = ""; //enable delete bulletin
 }
 
+$limit = '10';
  ?>
 
 <!DOCTYPE html>
@@ -76,7 +77,8 @@ if(!empty(getbulletin())){ //bulletin control
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+		<link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>
@@ -97,7 +99,7 @@ if(!empty(getbulletin())){ //bulletin control
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -123,14 +125,14 @@ if(!empty(getbulletin())){ //bulletin control
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -206,14 +208,14 @@ if(!empty(getbulletin())){ //bulletin control
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i> The manage bulletin is currently disabled due to server errors. Contact the developer for more information!
+                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /.row -->
 
 								<div class="row">
@@ -222,39 +224,34 @@ if(!empty(getbulletin())){ //bulletin control
 													<div class="panel-heading">
 														<a href="javascript:;" data-toggle="collapse" class="bggray cblack"
 														data-target="#pass-form" style="text-decoration: none; color: black;">
-															<h3 class="panel-title"><i class="fa fa-lock fa-fw"></i> Change Password
+															<h3 class="panel-title"><i class="fa fa-address-card fa-fw"></i> &nbsp Account Details
 															<i class="fa fa-fw fa-caret-down"></i></h3>
 													</a></div>
 													<div id="pass-form" class="collapse panel-body">
 															<div class="container-fluid">
-																<form id="p-form" class="form-group" action="../process/adminpass.php" method="POST">
-																	<h3>Admin no.<?php echo $account->id; ?> </h3>
-																	<input required="Required Field" type="hidden" name="id"
-																		value="<?php echo $account->id;?>" id="idadmin">
-																		<input required="Required Field" type="hidden" name="name"
-																			value="<?php echo $account->user;?>" id="admin">
-																		<label>Old password:
-																		<p style="display: inline; color: red;" id="olderror"></p></label>
-																		<div class="" id="operror">
-																			<input class="form-control" type="password" name="old"
-																			required id="old-pass">
-																		</div>
-																		<label>New Password:
-																		<p style="display: inline; color: red;" id="newerror"></p></label>
-																		<div class="" id="nperror">
-																			<input class="form-control" id="new-pass" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
-																		</div>
-																		<label>Confirm Password:
-																		<p style="display: inline; color: red;" id="conerror"></p></label>
-																		<div class="" id="cperror">
-																			<input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
-																		</div>
-																		<div class="text-right" style="margin-top: 10px;">
-																			<input class="btn btn-default" type="submit" name="submit" value="Save Password" id="pbutton">
-																		</div>
-																	</form>
+																<div class="row">
+																		<h3><i class="fa fa-universal-access fa-fw"></i> Admin no. <?php echo $_SESSION['id']; ?></h3>
+																	<div class="col-lg-5">
+																			<h4>Username: </h4>
+																			<h4>Access Level: </h4>
+																	</div>
+																	<div class="col-lg-7">
+																		<h4><strong> <?php echo $account->user; ?></strong>	</h4>
+																		<h4><strong> <?php echo $account->privilege; ?></strong></h4>
+																	</div>
+																</div>
+																<div class="row" style="margin-top: 10px;">
+																	<div class="col-lg-6">
+																		<button type="button" class="btn btn-default btn-block"
+																		data-toggle="modal" data-target="#changeuser">
+																		<i class="fa fa-edit"></i> Update Username</button>
+																	</div>
+																	<div class="col-lg-6">
+																		<button type="button" class="btn btn-default btn-block"
+																		data-toggle="modal" data-target="#changepass">
+																		<i class="fa fa-lock"></i> Update Password</button>
+																	</div>
+																</div>
 															</div>
 													</div>
 											</div>
@@ -272,7 +269,7 @@ if(!empty(getbulletin())){ //bulletin control
 																	<thead>
 																		<tr>
 																			<th>User</th>
-																			<th>Date</th>
+																			<th>Date [y-m-d]</th>
 																			<th>Time</th>
 																			<th>Day</th>
 																		</tr>
@@ -288,9 +285,17 @@ if(!empty(getbulletin())){ //bulletin control
 																		<?php endforeach; ?>
 																	</tbody>
 																</table>
-                                <div class="text-right">
-                                    <a href="#">View All Activity
+                                <div class="row">
+																	<div class="col-lg-6">
+																		<a class="btn btn-success btn-sm" href="../process/filedownload.php?file=5">
+																			<i class="fa fa-download"></i></a>
+																		<a class="btn btn-warning btn-sm" value="print"
+																	 	onclick="PrintDiv();"><i class="fa fa-print"></i></a>
+																	</div>
+																	<div class="col-lg-6 text-right">
+																		<a class="btn btn-primary" data-toggle="modal" data-target="#loginrecords">View All Activity
 																			<i class="fa fa-arrow-circle-right"></i></a>
+																	</div>
                                 </div>
                             </div>
                         </div>
@@ -312,24 +317,24 @@ if(!empty(getbulletin())){ //bulletin control
 
 																		 <label for="image"><i class="fa fa-picture-o"></i> Image :
 																		 <p style="display: inline; color: red;" id="imgerror"></p></label>
-																	 		<input id="image" name="image" type="file" <?php echo $dis; ?> disabled required><br>
+																	 		<input id="image" name="image" type="file" <?php echo $dis; ?> required><br>
 
 																		<label for=""> <i class="fa fa-user"></i> Title :
 																		<p style="display: inline; color: red;" id="titleerror"></p></label><br>
 																			<div class="" id="errortitle">
 																				<input class="form-control" id="title" type="text" name="title"
-																				value="" <?php echo $dis; ?> disabled required>
+																				value="" <?php echo $dis; ?> required>
 																			</div>
 
 																		<label for="post"><i class="fa fa-comments"></i> Post :
 																		<p style="display: inline; color: red;" id="posterror"></p></label><br>
 																			<div class="" id="errorpost">
 																				<textarea class="form-control" id="post" name="post" rows="5"
-																				<?php echo $dis; ?> required disabled></textarea>
+																				<?php echo $dis; ?> required></textarea>
 																			</div>
 
 																			<input class="btn btn-default" style="margin-top: 10px; width: 120px;"
-																			 type="submit" name="submit" value="Submit" id="bulletin" disabled <?php echo $dis; ?>>
+																			 type="submit" name="submit" value="Submit" id="bulletin" <?php echo $dis; ?>>
 																		</form>
 																	</div>
 
@@ -356,7 +361,7 @@ if(!empty(getbulletin())){ //bulletin control
 																		<div class="container-fluid">
 																			<form class="text-right" action="../process/delete.php" method="post">
 																				<button type="submit" class="btn btn-danger"
-																				name="delete" disabled <?php echo $dis2; ?>>Delete Bulletin</button>
+																				name="delete" <?php echo $dis2; ?>>Delete Bulletin</button>
 																			</form>
 																		</div>
 																	</div>
@@ -376,6 +381,119 @@ if(!empty(getbulletin())){ //bulletin control
     </div>
     <!-- /#wrapper -->
 
+		<div class="modal fade" id="loginrecords" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title font2"><i class="fa fa-clock-o fa-fw"></i>&nbsp Login Records</h3>
+						</div>
+						<div class="modal-body" style="height: 400px; overflow: auto;" id="divToPrint">
+							<table border="1" class="table table-bordered table-hover table-striped">
+								<thead>
+									<tr>
+										<th>User</th>
+										<th>Date [y-m-d]</th>
+										<th>Time</th>
+										<th>Day</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach(getrecordmodal($limit) as $g): ?>
+										<tr>
+											<td><?php echo  $g->name; ?></td>
+											<td><?php echo  $g->dates; ?></td>
+											<td><?php echo  $g->time; ?></td>
+											<td><?php echo  $g->day; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of modal -->
+
+		<!-- Password modal -->
+		<div class="modal fade" role="dialog" id="changepass">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content" style="padding-left: 20px; padding-right: 20px;">
+					<div class="row">
+						<div class="col-lg-12">
+							<form id="p-form" class="form-group" action="../process/adminpass.php" method="POST">
+						    <h3><strong>Update Password</strong></h3>
+						    <input required="Required Field" type="hidden" name="id"
+						      value="<?php echo $account->id;?>" id="idadmin">
+						      <input required="Required Field" type="hidden" name="name"
+						        value="<?php echo $account->user;?>" id="admin">
+						      <label>Old password:
+						      <p style="display: inline; color: red;" id="olderror"></p></label>
+						      <div class="" id="operror">
+						        <input class="form-control" type="password" name="old"
+						        required id="old-pass">
+						      </div>
+						      <label>New Password:
+						      <p style="display: inline; color: red;" id="newerror"></p></label>
+						      <div class="" id="nperror">
+						        <input class="form-control" id="new-pass" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						        title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+						      </div>
+						      <label>Confirm Password:
+						      <p style="display: inline; color: red;" id="conerror"></p></label>
+						      <div class="" id="cperror">
+						        <input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						        title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+						      </div>
+						      <div class="text-right" style="margin-top: 10px;">
+						        <input class="btn btn-default" type="submit" name="submit" value="Save Password" id="pbutton">
+						      </div>
+						    </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- username modal -->
+		<div class="modal fade" role="dialog" id="changeuser">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content" style="padding-left: 20px; padding-right: 20px;">
+					<div class="row">
+						<div class="col-lg-12">
+							<form class="form-group" action="../process/updatestudent.php" method="POST">
+								<h3><strong>Update Username</strong></h3>
+								<input required="Required Field" type="hidden" name="id"
+									value="<?php echo $account->id;?>">
+									<label>Username:</label>
+									<div class="">
+										<input class="form-control" type="text" name="uname" required pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+										title="Must be alphanumeric character and not your previous username" value="<?php echo $account->user; ?>">
+									</div>
+									<div class="text-right" style="margin-top: 10px;">
+										<input class="btn btn-default" type="submit" name="useronly" value="Update username">
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- errormodal -->
+		<div class="modal fade" role="dialog" id="errormodal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="text-center" style="padding: 10px 20px;">
+							<h4 id="text"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 
@@ -385,28 +503,51 @@ if(!empty(getbulletin())){ //bulletin control
     <!-- Custom JS -->
     <script src="../js/myownvalidation.js"></script>
 
-		<?php
-		if(isset($_GET['error']) && $_GET['error'] == 1){
-      echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("'.$_SESSION['error'].'");
-				})(jQuery);
-      </script>';
-    }
-		elseif(isset($_GET['error']) && $_GET['error'] == 2){
-			echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("'.$_SESSION['error'].'");
-				})(jQuery);
-      </script>';
-		}
-		elseif(isset($_GET['error']) && $_GET['error'] == 3){
-			echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("Fill up sanction first!");
-				})(jQuery);
-      </script>';
-		}
-		 ?>
+		<script type="text/javascript">
+			 var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			 var texterror = '<?php if(isset($_SESSION['error'])){echo $_SESSION['error'];}else{ echo '';} ?>';
+			 console.log(error);
+			 if(error != ''){
+				 console.log('inside here');
+				 switch (error) {
+				 	case '1': case '2':
+				 		$('#text').text(texterror);
+						$('#errormodal').modal('show');
+				 		break;
+					case '3':
+						$('#text').text("Fill up sanction first!");
+						$('#errormodal').modal('show');
+						break;
+					case '4':
+						$('#text').text("Only the treasurer is allowed");
+						$('#errormodal').modal('show');
+						break;
+					case '5':
+						$('#text').text("Only the president is allowed");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
+					case '6':
+						$('#text').text("You insolent fool! Try again!");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
+					case '7':
+						$('#text').text("Username already exists!");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
+				 }
+			 }
+
+			 function PrintDiv() {
+				   var divToPrint = document.getElementById('divToPrint');
+				   var popupWin = window.open('', '_blank', 'width=900,height=500');
+				   popupWin.document.open();
+				   popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+				   popupWin.document.close();
+	 		  }
+		</script>
+
 </body>
 </html>

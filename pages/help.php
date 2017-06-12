@@ -6,7 +6,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -44,7 +44,8 @@ if($_SESSION['admin'] == "dean"){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+        <link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>
@@ -65,7 +66,7 @@ if($_SESSION['admin'] == "dean"){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -91,11 +92,11 @@ if($_SESSION['admin'] == "dean"){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
@@ -206,7 +207,7 @@ if($_SESSION['admin'] == "dean"){
 																			<h4>System Configuration</h4>
 																			<p>The system operates on any browser application. It is compatible with Microsoft Edge, Mozilla Firefox, Google Chrome and etc. Although the application required internet connection, there is no need for any installation only deployment and can be used immediately without any further configuration.</p>
 																			<h4>User access level</h4>
-																			<p>The system provides default administrators together with respective passwords. The Dean will be given the super-user privilege which can manage the admin accounts. The administrators have full access to systems basic features.</p>
+																			<p>The system provides default administrators together with respective passwords and access levels. The Dean will be given the super-user privilege which can manage the admin accounts. The administrators have full access to systems basic features with their respective access levels.</p>
 																			<h4>Contingencies</h4>
 																			<p>In case of power outage, the system will not be directly affected, unsaved data will be lost but the data already stored in the database is kept safe. In case there is no Internet connection available data cannot be saved in internal memory of the operating device.</p>
 																		</div>
@@ -247,6 +248,8 @@ if($_SESSION['admin'] == "dean"){
 																		<p>This panel has 3 input fields, the old password, new password and confirm password, its’ validation is powered by Javascript and Ajax which makes error handling efficient. When an an error has occurred when an input field is focused-out, the ajax fires an element through Jquery and creates a red text error notification and the “save password” button will be disabled.</p>
 																		<h4>Login Records</h4>
 																		<p>This panel is a one-way reporting of Logs made into the system by administrators. Reporting the Admin name, the date time and day of when the logged-in was made.</p>
+																		<p>The panel is limited to 10 recent login records, however a button (View all activity) bellow will activate a modal with a hundred recent login records.</p>
+																		<p>The 2 buttons on the lower-left corner are download and print, which basically speaks for itself, however, it is important to note that upon downloading, there might be some few errors when opening the csv file in EXCEL, becuase of SYLK format, anyhow, the user is encourage to just click ok until the record is shown in EXCEL. Also, if the date will be presented like "######", there should be no cause for worry, once the column is wide enough, the data will be shown.</p>
 																		<h4>Manage Bulletin</h4>
 																		<p>This panel is a multipart/form-data form which can post images and announcements on the homepage bulletin section. Once submitted, the input boxes inside the bulletin panel will be disabled allowing only one post at a time and the delete button inside the panel will be activated. When clicked, the post will be deleted and the input boxes will be reactivated. </p>
 																	</div>
@@ -288,7 +291,7 @@ if($_SESSION['admin'] == "dean"){
                               <div class="row collapse" id="meetings">
                                 <div class="col-lg-12" style="padding-left: 50px;">
                                   <h3>Meetings</h3>
-																	<p>The image above shows the Meetings section of the navigation bar. With 2 panels namely, “Manage Meeting”, and “Meetings List”.</p>
+																	<p>The Meetings section of the navigation bar can only be accessed by the President and Dean. With 2 panels namely, “Manage Meeting”, and “Meetings List”.</p>
 																	<div class="row" style="padding-left: 70px;">
 																		<h4>Manage Meetings</h4>
 																		<p>The former panel is a simple event registration with 2 input fields, Event description and Date of the event. Once submitted, it will be added automatically to the next panel. </p>
@@ -306,7 +309,7 @@ if($_SESSION['admin'] == "dean"){
                               <div class="row collapse" id="sanction">
                                 <div class="col-lg-12" style="padding-left: 50px;">
                                   <h3>Sanctions</h3>
-																	<p>The Sanction is the core of the system. It has 4 divisions; “Add Student-Sanction”, “Edit by Year” and “Sanction List”. Note: This section cannot be accessed if there are no students and meeting data. Depending on which the admin is lacking, the page will be automatically redirected. </p>
+																	<p>The Sanction is the core of the system. It has 4 divisions; “Add Student-Sanction”, “Edit by Year” and “Sanction List”. Note: This section cannot be accessed if there are no students and meeting data and only by the treasurer. Depending on which the admin is lacking, the page will be automatically redirected. </p>
 																	<div class="row" style="padding-left: 70px;">
 																		<h4>Add Student-Sanction</h4>
 																		<p>This panel is for registering students into the sanction table. It is important to note that the Select dropdown field are names from the student table which are not yet registered into the sanction table. And since using CSV format and text format bulk registration automatically registers the students name into the sanction list, this panel would seem of little use. However, when there are students that has been left that has not been registered into the system yet, this panel would prove itself useful.</p>

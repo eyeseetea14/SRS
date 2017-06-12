@@ -5,8 +5,12 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
 
+if($_SESSION['priv'] != 'TREASURER' && $_SESSION['priv'] != 'DEAN'){
+	header('Location: index.php?error=4');
+}
+
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -55,7 +59,14 @@ if(isset($_GET['year'])){
 		$table = sancbyyear($_GET['year']);
 }
 
-
+if($arraycount >= 1){$meet1 = $desc[0];}
+if($arraycount >= 2){$meet2 = $desc[1];}
+if($arraycount >= 3){$meet3 = $desc[2];}
+if($arraycount >= 4){$meet4 = $desc[3];}
+if($arraycount >= 5){$meet5 = $desc[4];}
+if($arraycount >= 6){$meet6 = $desc[5];}
+if($arraycount >= 7){$meet7 = $desc[6];}
+if($arraycount >= 8){$meet8 = $desc[7];}
 
 ?>
 
@@ -87,7 +98,8 @@ if(isset($_GET['year'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+		<link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>
@@ -108,7 +120,7 @@ if(isset($_GET['year'])){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -134,13 +146,13 @@ if(isset($_GET['year'])){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -364,48 +376,48 @@ if(isset($_GET['year'])){
 											<div class="panel-body" style="padding-top: 0px;">
 												<div class="row" style="overflow: auto;">
 													<div class="flot-chart" id="divToPrint">
-														<table class="table table-responsive table-striped">
-															<thead class="text-center">
-																<tr class="">
-																	<th>Student</th>
-																	<?php foreach ($meetdate as $g): ?>
-																	<th><?php echo $g; ?></th>
-																	<?php endforeach;?>
-																	<th>Total</th>
-																	<th class="text-center">Option</th>
-																</tr>
-															</thead>
-															<tbody id="sanctions-table">
-																<?php foreach ($table as $k):?>
-																	<tr>
-																		<td><?php echo $k->surname.', '.$k->firstname; ?></td>
-																		<?php $total = 0;?>
-																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
-																						if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
-																		<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
-																						if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
-																		<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
-																						if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
-																		<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
-																						if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
-																		<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
-																						if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
-																		<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
-																						if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
-																		<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
-																						if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
-																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
-																						if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
-																		<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
-																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
-																			class="editSanction btn btn-primary" data-target="#edit-sanction">
-																		<i class="fa fa-edit"></i></a>
-																		<a class="deleteSanction btn btn-danger" data-id="<?php echo $k->sanc_id?>">
-																		<i class="fa fa-trash"></i></a></td>
-																	</tr>
-																	<?php endforeach;?>
-															</tbody>
-														</table>
+			<table class="table table-responsive table-striped">
+				<thead class="text-center">
+					<tr class="">
+						<th>Student</th>
+						<?php foreach ($meetdate as $g): ?>
+						<th><?php echo $g; ?></th>
+						<?php endforeach;?>
+						<th>Total</th>
+						<th class="text-center">Option</th>
+					</tr>
+				</thead>
+				<tbody id="sanctions-table">
+					<?php foreach ($table as $k):?>
+						<tr>
+							<td><?php echo $k->surname.', '.$k->firstname; ?></td>
+							<?php $total = 0;?>
+							<?php if($arraycount >= 1){echo '<td>'.$k->$meet1.'</td>';
+											if(is_numeric($k->$meet1)){$total += $k->$meet1;}} ?>
+							<?php if($arraycount >= 2){echo '<td>'.$k->$meet2.'</td>';
+											if(is_numeric($k->$meet2)){$total += $k->$meet2;}} ?>
+							<?php if($arraycount >= 3){echo '<td>'.$k->$meet3.'</td>';
+											if(is_numeric($k->$meet3)){$total += $k->$meet3;}} ?>
+							<?php if($arraycount >= 4){echo '<td>'.$k->$meet4.'</td>';
+											if(is_numeric($k->$meet4)){$total += $k->$meet4;}} ?>
+							<?php if($arraycount >= 5){echo '<td>'.$k->$meet5.'</td>';
+											if(is_numeric($k->$meet5)){$total += $k->$meet5;}} ?>
+							<?php if($arraycount >= 6){echo '<td>'.$k->$meet6.'</td>';
+											if(is_numeric($k->$meet6)){$total += $k->$meet6;}} ?>
+							<?php if($arraycount >= 7){echo '<td>'.$k->$meet7.'</td>';
+											if(is_numeric($k->$meet7)){$total += $k->$meet7;}} ?>
+							<?php if($arraycount >= 8){echo '<td>'.$k->$meet8.'</td>';
+											if(is_numeric($k->$meet8)){$total += $k->$meet8;}} ?>
+							<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
+							<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
+								class="editSanction btn btn-primary" data-target="#edit-sanction">
+							<i class="fa fa-edit"></i></a>
+							<a class="deleteSanction btn btn-danger" data-id="<?php echo $k->sanc_id?>">
+							<i class="fa fa-trash"></i></a></td>
+						</tr>
+						<?php endforeach;?>
+				</tbody>
+			</table>
 													</div>
 												</div>
 											</div>

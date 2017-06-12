@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost";
-$username = "srs";
-$password = "o7kymdy4v1HLCUsJ";
+$username = "root";
+$password = "";
 
 try {
     $conn = new PDO("mysql:host=$servername", $username, $password);
@@ -24,13 +24,14 @@ catch(PDOException $e)
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `user` varchar(15) NOT NULL,
    `pass` varchar(15) NOT NULL,
+   `privilege` varchar(15) NOT NULL,
    PRIMARY KEY (`id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
- $adminvalues = $con->prepare("INSERT INTO `admin` (`id`, `user`, `pass`) VALUES
- (1, 'dean', 'dean'),
- (2, 'admin', 'admin'),
- (3, 'admin2', 'admin2');");
+ $adminvalues = $con->prepare("INSERT INTO `admin` (`id`, `user`, `pass`, `privilege`) VALUES
+ (1, 'dean', 'dean', 'DEAN'),
+ (2, 'pres', 'pres', 'PRESIDENT'),
+ (3, 'treasurer', 'treasurer', 'TREASURER');");
 
  $bulletin = $con->prepare("CREATE TABLE `bulletin` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -41,9 +42,10 @@ catch(PDOException $e)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
  $meeting = $con->prepare("CREATE TABLE `meeting` (
-   `m_id` int(11) NOT NULL AUTO_INCREMENT,
-   `description` varchar(50) NOT NULL,
-   `m_date` date NOT NULL,
+  `m_id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(50) NOT NULL,
+  `penalty` varchar(4) NOT NULL,
+  `m_date` date NOT NULL,
    PRIMARY KEY (`m_id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
@@ -75,7 +77,7 @@ catch(PDOException $e)
 
 
 if($admin->execute() && $bulletin->execute()
-&& $meeting->execute() && $record->execute()
+ && $record->execute() && $meeting->execute()
 && $sanction->execute() && $student->execute()){
   $adminvalues->execute();
   header('Location: ../index.php');

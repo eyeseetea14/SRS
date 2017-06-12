@@ -187,6 +187,8 @@ if(isset($_POST['updatesanc'])){
 	    $stmt->bindParam(':total', $total);
 	}
 	elseif($arraycount == 2){
+		// echo $meet1." ".$meet2." ".$r1." ".$r2." ".$id."<br>";
+		// echo "in here";
 		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, total = :total WHERE sanc_id = :id");
 	    $stmt->bindParam(':m1', $r1);
 	    $stmt->bindParam(':m2', $r2);

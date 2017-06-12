@@ -6,7 +6,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -14,7 +14,7 @@ if($_SESSION['admin'] == "dean"){
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "disabled";
+$dis = "";
 $btn = "btn-default";
 
 if(isset($_SESSION['QUE_ERROR'])){
@@ -57,7 +57,8 @@ if(isset($_SESSION['QUE_ERROR'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+		<link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>
@@ -78,7 +79,7 @@ if(isset($_SESSION['QUE_ERROR'])){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -104,13 +105,13 @@ if(isset($_SESSION['QUE_ERROR'])){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                      &nbsp Admin <b class="caret"></b></a>
+                      &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -212,10 +213,11 @@ if(isset($_SESSION['QUE_ERROR'])){
 																			<i class="fa fa-info-circle"
 																			style="font-size: 15px; color: black;
 																			margin-left: 10px;"></i></a></h4>
-																			<input class="form-control" name="csv" type="file"
+																			<input class="form-control" id="csvfile" name="csv" type="file"
 																			placeholder="asdfasdf" value="Names" required>
 																			<div class="text-right" style="margin-top: 10px;">
-																				<button class="btn btn-primary"
+																				<img src="../img/loading.gif" alt="loading" class="gif">
+																				<button class="btn btn-primary submitcsv"
 																				type="submit" name="sub"> Submit File &nbsp<i class="fa fa-send">
 																				</i></button>
 																			</div>
@@ -243,14 +245,14 @@ if(isset($_SESSION['QUE_ERROR'])){
 																							<div class="form-group" style="margin-top: 10px;">
 																								<label for="names" class="col-sm-2">Sname:</label>
 																								<div class="col-sm-10">
-																									<input id="names" name="userlast" type="file"
+																									<input id="lnames" name="userlast" type="file"
 																									class="" placeholder="Names" required <?php echo $dis; ?>>
 																								</div>
 																							</div>
 																							<div class="form-group" style="margin-top: 10px;">
 																								<label for="names" class="col-sm-2">Gname:</label>
 																								<div class="col-sm-10">
-																									<input id="names" name="userfirst" type="file"
+																									<input id="fnames" name="userfirst" type="file"
 																									class="" placeholder="Names" required <?php echo $dis; ?>>
 																								</div>
 																							</div>
@@ -269,7 +271,8 @@ if(isset($_SESSION['QUE_ERROR'])){
 																								</div>
 																							</div>
 																							<div class="text-right" style="margin-bottom: 10px;">
-																								<button class="btn btn-default" type="submit"
+																								<img src="../img/loading.gif" alt="loading" class="gif2">
+																								<button class="btn btn-default submittxt" type="submit"
 																								value="Submit File" name="submit"
 																								<?php echo $dis; ?>> Submit File
 																								 <i class="fa fa-send"></i> </button>
@@ -434,7 +437,16 @@ if(isset($_SESSION['QUE_ERROR'])){
 
     </div>
     <!-- /#wrapper -->
-
+		<!-- modal for notifications -->
+		<div class="modal fade" role="dialog" id="errormodal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="text-center" style="padding: 10px 20px;">
+							<h4 id="text"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 
@@ -479,6 +491,22 @@ if(isset($_SESSION['QUE_ERROR'])){
 						}
 				});
 		});
+
+		$(document).on("click", ".submitcsv", function () {
+		   var id = $('#csvfile').val();
+		     if(id != '')
+		       {
+						 $('.gif').show();
+		       }
+		});
+
+		$(document).on("click", ".submittxt", function () {
+		   var id = $('#cpnum').val();
+		     if(id != '')
+		       {
+						 $('.gif2').show();
+		       }
+		});
 		</script>
 
 		<!-- Activate bootstrap tooltip -->
@@ -486,40 +514,60 @@ if(isset($_SESSION['QUE_ERROR'])){
 			$(document).ready(function(){
 					$('[data-toggle="tooltip"]').tooltip();
 			});
+
+			var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			var success = '<?php if(isset($_GET['success'])){echo $_GET['success'];}else{echo '';} ?>';
+			var texterror = '<?php if(isset($_SESSION['error'])){echo $_SESSION['error'];}else{ echo '';} ?>';
+			console.log(error);
+			if(error != '' || success != ''){
+				console.log('inside here');
+				switch (success) {
+					case '1':
+					  $('#text').text("Updated Successfully!");
+					  $('#errormodal').modal('show');
+						break;
+					case '2':
+					  $('#text').text("Registered Successfully!");
+					  $('#errormodal').modal('show');
+						break;
+				}
+				switch (error) {
+				 case '1':
+					 $('#text').text("Delete meetings first!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '2':
+					 $('#text').text("Name already exist!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '3':
+					 $('#text').text("DB error!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '5':
+					 $('#text').text("Register a student first!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '6':
+				 	 $('#text').text("File Tpye Invalid!");
+				 	 $('#errormodal').modal('show');
+				 	 break;
+				}
+			}
+
 		</script>
-
-<?php
-if(isset($_GET['success']) && $_GET['success'] == 1){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Update Success");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 1){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Delete meetings first");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 2){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Name already exist");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 5){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Register a student first");
-			});
-	 </script>';
-}
-
- ?>
-
 </body>
-
 </html>
+
+<style>
+	.gif{
+		display: none;
+		height: 10%;
+		width: 10%;
+	}
+	.gif2{
+		display: none;
+		height: 10%;
+		width: 10%;
+	}
+</style>

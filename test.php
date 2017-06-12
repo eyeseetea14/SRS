@@ -1,36 +1,25 @@
 <?php
-include "process/functions.php";
+include 'process/functions.php';
 
-  if(isset($_POST['txt'])){
-    echo $_POST['txt'];
-    echo '<br>';
-    $textToStore = nl2br(htmlentities($_POST['txt'], ENT_QUOTES, 'UTF-8'));
-    echo $textToStore;
-  }
+echo "im here";
+$getdesc = getdescription2();
+$arraycount = count($getdesc);
+for ($i = 0; $i <$arraycount; $i++){
+	$desc[] = implode(',', $getdesc[$i]);
+}
 
-?>
+$table = getsanction();
+if(isset($_GET['year'])){
+		$table = sancbyyear($_GET['year']);
+}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form class="" action="#" method="post">
-      <textarea name="txt" rows="8" cols="80"></textarea>
-      <button type="submit" name="button">Submit</button>
-    </form>
-  </body>
-</html>
+print_r($desc);
+var_dump($desc);
+// print_r($table);
+echo $desc[0];
+foreach ($table as $k) {
+	echo $k->$desc[0];
+}
 
-<script type="text/javascript">
-  var name = "<input";
-  var rgx = /^([a-zA-Z0-9 _-]+)$/;
-  if(rgx.test(name)){
-    console.log("True");
-  }
-  else{
-    console.log("False");
-  }
-</script>
+
+ ?>
